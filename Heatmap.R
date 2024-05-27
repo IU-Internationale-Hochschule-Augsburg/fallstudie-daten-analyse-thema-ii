@@ -38,5 +38,3 @@ library(plotly)
 plot_ly(z = ~x, type = "heatmap") %>%
   layout(xaxis = list(title = "Person"), yaxis = list(title = "Körperteil"),
          title = "Heatmap mit plotly")
-
-

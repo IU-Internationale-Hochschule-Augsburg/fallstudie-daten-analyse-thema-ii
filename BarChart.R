@@ -12,3 +12,11 @@ barplot(alter, names.arg = c("P1", "P2", "P3", "P4", "P5", "P6", "P7"),
         xlab = "Personen", ylab = "Alter",
         col = "skyblue")
 abline(h = durchschnitt_alter, col = "red", lwd = 2)
+
+
+# Erstelle ein Balkendiagramm 
+barplot(alter, names.arg = c("P1", "P2", "P3", "P4", "P5", "P6", "P7"),
+        main = "Alter der Personen",
+        xlab = "Personen", ylab = "Alter",
+        col = "skyblue")
+

@@ -14,8 +14,6 @@ x <- data.matrix(ds, rownames.force = FALSE)
 
 heatmap(x, labRow = rn, labCol = cn, main = "Test Heat Map")
 
-
-# Installiere das reshape-Paket (falls noch nicht installiert)
 # install.packages("reshape")
 library(reshape)
 
@@ -23,14 +21,6 @@ library(reshape)
 data_melt <- melt(ds)
 head(data_melt)  # Zeige die ersten sechs Zeilen der umgewandelten Daten an
 
-# Erstelle die Heatmap mit ggplot2
-ggplot(data_melt, aes(x = X2, y = X1, fill = value)) +
-  geom_tile() +
-  labs(x = "Person", y = "Körperteil", title = "Heatmap mit ggplot2")
-
-
-
-# Installiere das plotly-Paket (falls noch nicht installiert)
 # install.packages("plotly")
 library(plotly)
 

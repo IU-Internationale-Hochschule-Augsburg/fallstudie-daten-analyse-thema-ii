@@ -17,6 +17,9 @@ median(iris$Sepal.Length)  # Median der Spalte Sepal.Length
 #Median nach Gruppen
 aggregate(iris$Sepal.Length, list(iris$Species), median)
 
+# Beispiel-Daten für den Median
+x3 <- c(1, 2, 3, 4, 5)
+
 #Visualisierung des Medians
 hist(x3)  # Histogramm
 abline(v = median(x3), col = "red", lwd = 3)  # Medianlinie hinzufügen

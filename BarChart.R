@@ -10,6 +10,9 @@ title <- "Alter der Personen"
 x_label <- "Personen"
 y_label <- "Alter"
 
+# Hier der Text für die Caption
+caption <- "Die rote Linie kennzeichnet den Durchschnittwert"
+
 # Erstelle ein Balkendiagramm mit dem Durchschnitt als Linie
 barplot(alter, names.arg = x_labels,
         main = title,
@@ -19,5 +22,3 @@ abline(h = durchschnitt_alter, col = "red", lwd = 2)
 
 # 1.Zeile ist der Code für die Caption (Kursiver Text unter der Graphik)
 mtext(text = bquote(italic(.(caption))), side = 1, line = 4, cex = 0.8)
-# Hier der Text für die Caption
-caption <- "Die rote Linie kennzeichnet den Durchschnittwert"

@@ -19,3 +19,9 @@ hist(data_numeric, main="Histogramm des numerischen Vektors",
 
 # Markiere den Modus im Histogramm
 abline(v = mode_numeric, col = "red", lwd = 2)
+
+# Text für die Caption
+caption <- "Der rote Strich zeigt die am häufigsten vorkommende Zahl an."
+
+# Code für die Caption (Kursiver Text unter der Graphik)
+mtext(text = bquote(italic(.(caption))), side = 1, line = 4, cex = 0.8)

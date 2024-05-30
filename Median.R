@@ -24,3 +24,9 @@ x3 <- c(1, 2, 3, 4, 5)
 hist(x3)  # Histogramm
 abline(v = median(x3), col = "red", lwd = 3)  # Medianlinie hinzufügen
 text(x = 5, y = 200, "Median von x3", col = "red")  # Text hinzufügen
+
+# Text für die Caption
+caption_median <- "Die rote Linie kennzeichnet den Medianwert."
+
+# Code für die Caption (Kursiver Text unter der Graphik)
+mtext(text = bquote(italic(.(caption_median))), side = 1, line = 4, cex = 0.8)

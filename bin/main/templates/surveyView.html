@@ -1,0 +1,112 @@
+<!-- Survey-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet"/>
+
+     <!-- <link rel="stylesheet" href="../static/survey.css" > -->
+
+    <title>Umfrageansicht</title>
+</head>
+
+<body>
+<div class="header">
+    <!-- Username -->
+    <div class="col-75">
+        <h3>Hello, <span th:remove="tag" sec:authentication="name">!</span> </h3>
+    </div>
+    <!-- Button for options/settings next to the username -->
+    <div class="col-25" style="text-align: right">
+        <form style="width: 100%" action="#" th:action="@{/user-actions}" method="get">
+            <button class="optbutton" name="userActions" th:value="'logout'">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+
+            <button class="optbutton" name="userActions" th:value="'settings'">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+
+            <input type="hidden" name="userActions" th:value="${userActions}"/>
+        </form>
+    </div>
+</div>
+
+
+<div class="content">
+    <form action="#" th:action="@{/button-survey-handler}" th:object="${surveyView}" method="get" id="surveyViewForm"
+          style="width: 100%">
+        <table style="width: 100%">
+            <!-- Projects heading -->
+            <thead>
+            <tr>
+                <th style="border-bottom: 0; text-align: left"><b style="font-size: 30px">Projekte</b></th>
+            </tr>
+            </thead>
+
+            <tbody style="padding: 10px">
+
+            <!-- hidden input field to store which button was clicked -->
+            <input type="hidden" name="buttonHandler" th:value="${buttonHandler}"/>
+
+            <!-- dynamic loop over the surveys -->
+            <tr style="width: 100%" th:each="survey, surveyStat : *{surveys}">
+                <!-- Survey title -->
+                <td class="col-75" th:text="${survey.title}"></td>
+
+                <!-- hidden input field to store which button was clicked -->
+                <input type="hidden" id="surveyId" th:value="${survey.surveyId}"/>
+
+                <!-- buttons -->
+                <td class="col-25" style="text-align: right; padding: 0">
+                    <button type="submit" name="buttonHandler" th:value="'delete_' + ${survey.surveyId}"
+                            class="optbutton">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                    <button name="buttonHandler" th:data-survey-id="${survey.surveyId}" value=""
+                            class="optbutton" onclick="showAlert(this.getAttribute('data-survey-id'))">
+                        <span class="material-symbols-outlined">link</span>
+                    </button>
+                    <!-- Ggf. für den Link-Button: th:value="'share_' + ${survey.surveyId}" -->
+                    <button type="submit" name="buttonHandler" th:value="'edit_' + ${survey.surveyId}"
+                            class="optbutton" title="Fragen bearbeiten">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button type="submit" name="buttonHandler" th:value="'monitoring_' + ${survey.surveyId}"
+                            class="optbutton">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        <span class="tooltiptext">Analyse</span>
+                    </button>
+                    <button type="submit" name="buttonHandler" th:value="'settings_' + ${survey.surveyId}"
+                            class="optbutton">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </form>
+</div>
+
+<div class="footer">
+    <form method="get" action="/add-survey">
+        <button class="formularabsenden">+ Umfrage hinzufügen</button>
+    </form>
+</div>
+
+<script>
+    function showAlert(surveyId) {
+        var message = "http://localhost:8080/participant-view?surveyId=" + surveyId + "&currentQuestion=0";
+        debugger;
+        alert(message);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!-- Add-question-screen -->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{/js/question.js}"></script>
+
+     <link rel="stylesheet" href="../static/css/survey.css">
+
+    <title>Frage hinzufügen</title>
+</head>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <h3>Neue Frage erstellen</h3>
+</div>
+
+<div class="content" style="flex-direction: column">
+
+    <!-- Input field and label for the question -->
+    <form style="width: 100%" id="addQuestionForm" action="#" th:action="@{/question-save}" th:object="${addQuestion}" method="post" onsubmit="return validateForm()">
+        <div class="formularreihe">
+            <div class="col-25">
+                <label for="questionText">Frage:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{questionText}" placeholder="Geben Sie die Frage ein" class="textfeld" id="questionText" autofocus maxlength="256" required>
+            </div>
+        </div>
+
+        <!-- Three radiobuttons for selecting the question type -->
+        <div class="containerFlex" style="margin-bottom: 10px; justify-content: space-between">
+            <!-- Radiobuttons for question type -->
+            <div style="width: auto" class="formularreihe">
+                <label class="container">Radiobutton
+                    <input type="radio" name="fragentyp" value="radiobutton" onchange="updateQuestionType(this.value)" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Checkbox
+                    <input type="radio" name="fragentyp" value="checkbox" onchange="updateQuestionType(this.value)">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Freitext
+                    <input type="radio" name="fragentyp" value="open text response" onchange="updateQuestionType(this.value)">
+                    <span class="checkmark"></span>
+                </label>
+
+                <input type="hidden" id="questionType" th:field="*{questionType}" th:value="*{questionType}" readonly>
+                <input type="hidden" id="surveyId" th:field="*{surveyId}" th:value="*{surveyId}" readonly>
+            </div>
+        </div>
+
+        <div class="formularreihe">
+            <!-- Title "Beschreibung" -->
+            <div class="col-25">
+                <label for="description">Beschreibung:</label>
+            </div>
+
+            <!-- Text field for the description -->
+            <div class="col-75">
+                <textarea th:field="*{description}" name="description" id="description" placeholder="Formulieren Sie eine Beschreibung" class="textfeld"
+                          style="height: 200px" maxlength="1024"></textarea>
+            </div>
+        </div>
+
+        <!-- Answer options -->
+        <div id="answerOptions" style="display: none;">
+            <div id="answer1">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption1">Antwortoption 1: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption1" th:field="*{answerOption1}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer2">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption2">Antwortoption 2: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption2" th:field="*{answerOption2}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer3">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption3">Antwortoption 3: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption3" th:field="*{answerOption3}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer4">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption4">Antwortoption 4: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption4" th:field="*{answerOption4}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer5">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption5">Antwortoption 5: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption5" th:field="*{answerOption5}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer6">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption6">Antwortoption 6: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption6" th:field="*{answerOption6}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer7">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption7">Antwortoption 7: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption7" th:field="*{answerOption7}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+            <div id="answer8">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 8px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption8">Antwortoption 8: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption8" th:field="*{answerOption8}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer9">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption9">Antwortoption 9: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption9" th:field="*{answerOption9}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+
+            <div id="answer10">
+                <div class="containerFlex" style="border-bottom: solid 1px black; padding-top: 2px; padding-bottom: 12px; padding-left: 10px; margin-bottom: 12px;">
+                    <label style="width: 25%; display: flex; align-items: center" for="antwortOption10">Antwortoption 10: </label>
+
+                    <!-- Input field -->
+                    <div class="col-75">
+                        <input class="textfeld" style="padding: 12px;height: 42px;" type="text" id="antwortOption10" th:field="*{answerOption10}"
+                               placeholder="Geben Sie eine Antwortoption ein">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Cancel and Save buttons -->
+<div class="footer">
+    <button type="button" class="formularabsenden" onclick="goBack()">Abbrechen</button>
+
+    <button form="addQuestionForm" type="submit" class="formularabsenden">Speichern</button>
+</div>
+
+</body>
+</html>

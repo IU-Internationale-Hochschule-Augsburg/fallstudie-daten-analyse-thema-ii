@@ -1,0 +1,94 @@
+<!-- Add-question-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/survey.js}"></script>
+
+     <link rel="stylesheet" href="../static/css/survey.css" >
+
+    <style>
+        /* style for error message */
+        #error-message {
+            color: red;
+            font-size: 12px;
+            text-align: right;
+        }
+    </style>
+
+    <title>Umfrage hinzufügen</title>
+</head>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <h3>Neue Umfrage erstellen</h3>
+</div>
+
+<div class="content">
+    <form style="width: 100%" id="addSurveyForm" action="#" th:action="@{/survey-save}" th:object="${survey}" method="post">
+        <!-- First row: Survey title -->
+        <div class="formularreihe">
+            <!-- Survey title -->
+            <div class="col-25">
+                <label for="title">Titel der Umfrage:</label>
+            </div>
+
+            <!-- Placeholder and text field for the survey title -->
+            <div class="col-75">
+                <input type="text" th:field="*{title}" name="title" id="title" placeholder="Geben Sie einen Titel ein" class="textfeld" required autofocus maxlength="256">
+            </div>
+        </div>
+
+        <!-- Second row: Duration -->
+        <div class="formularreihe" style="align-items: center; height: 100px">
+            <!-- Title "Laufzeit der Umfrage" -->
+            <div class="col-25">
+                <label>Laufzeit der Umfrage:</label>
+            </div>
+
+            <!-- Start and End date fields -->
+            <div class="col-75">
+                <label for="startdate">Startdatum: </label>
+                <input type="date" th:field="*{startDate}" name="startdate" id="startdate" onclick="setStartdateAndLimit()" style="font-size: 21px;padding: 0;" required>
+                <label for="enddate">Enddatum: </label>
+                <input type="date" th:field="*{endDate}" name="enddate" id="enddate" onclick="setEnddateAndLimit()" style="font-size: 21px;padding: 0" required>
+            </div>
+        </div>
+
+        <!-- Third row: Description -->
+        <div class="formularreihe">
+            <!-- Title "Beschreibung" -->
+            <div class="col-25">
+                <label for="description">Beschreibung:</label>
+            </div>
+
+            <!-- Text field for the description -->
+            <div class="col-75">
+                <textarea th:field="*{description}" name="description" id="description" placeholder="Formulieren Sie eine Beschreibung" class="textfeld"
+                          style="height: 200px" maxlength="1024"></textarea>
+            </div>
+        </div>
+
+        <p id="error-message"></p>
+
+    </form>
+</div>
+
+<!-- Cancel and Save buttons including actions -->
+<div class="footer">
+    <form method="post" th:action="@{/survey-admin}">
+        <button type="submit" class="formularabsenden">Abbrechen</button>
+    </form>
+
+    <button type="submit" form="addSurveyForm" class="formularabsenden">Speichern</button>
+</div>
+
+</body>
+</html>

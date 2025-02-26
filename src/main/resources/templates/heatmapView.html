@@ -1,0 +1,67 @@
+<!--Heatmap-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/survey.css">
+
+    <title>Heatmap</title>
+</head>
+
+<style>
+    .diagram {
+        border-collapse: collapse;
+        width: 100%;
+        display: none;
+    }
+</style>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <div class="col-75">
+      <h3 th:text="${title1}"></h3>
+      <h3 th:text="${title2}"></h3>
+    </div>
+    <div class="col-25" style="text-align: right">
+            <button class="optbutton" onclick="window.history.back()">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span class="tooltiptext">Zurück</span>                
+            </button>
+    </div>
+</div>
+
+<div class="content">
+    <div style="width: 100%;">
+        <p th:if="${title1==title2}">Die selbe Frage kann nicht mit sich selbst verglichen werden!</p>
+    <div th:id="heatmap" th:if="${!(title1==title2)}">
+        <img th:src="'/images/' + ${filename} +'.png'" id="heatmap" alt="heatmap" width="1000" height="700">
+        <input type="hidden" th:value="'/images/' + ${filename}+'.png'"/>
+    </div>
+</div>
+</div>
+
+<div class="footer">
+    <form action="#" th:action="@{button-analysis-handler}" th:object="${survey}" method="get" style="width: 100%">
+        <!-- hidden input field to store which button was clicked -->
+        <input type="hidden" name="buttonHandler" th:value="${buttonHandler}"/>
+
+        <button type="submit" name="buttonHandler" th:value="'back_' + ${survey}"
+                    class="optbutton">
+                    Zurück zur Fragenübersicht
+                <span class="tooltiptext">Zurück zur Fragenübersicht</span>                
+        </button>
+        <!-- hidden input field to store which button was clicked -->
+        <input type="hidden" name="surveyId" id="surveyId" th:value="${survey}"/>
+    </form>
+
+</div>
+
+</body>
+</html>

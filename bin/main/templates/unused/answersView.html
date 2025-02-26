@@ -1,0 +1,73 @@
+<!-- Questions-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="../../static/css/survey.css">
+
+    <title>Antwortenansicht</title>
+</head>
+
+<body>
+
+<!-- Page title -->
+<div class="header">
+    <h3 th:text="${answersView.questionText}"></h3>
+</div>
+
+<div class="content">
+    <form action="#" th:action="@{/button-answer-handler}" th:object="${answersView}" method="get"
+          style="width: 100%">
+        <table class="tabelletext">
+            <!-- Heading: Questions -->
+            <thead>
+            <tr>
+                <th style="border-bottom: 0"><b style="font-size: 30px">Antworten</b></th>
+            </tr>
+            </thead>
+            <tbody style="padding: 10px">
+
+            <!-- hidden input field to store which button was clicked -->
+            <input type="hidden" name="buttonAnswerHandler" th:value="${buttonAnswerHandler}"/>
+
+            <!-- This needs to be dynamized -->
+            <tr th:each="answer, answerStat : *{answers}">
+                <td th:text="${answer.radiobutton}"></td>
+                <td style="text-align: right">
+                    <!-- hidden input field to store the questionId -->
+                    <input type="hidden" name="surveyId" th:value="${answer.questionId}"/>
+
+                    <button type="submit" class="optbutton" name="buttonQuestionHandler"
+                            th:value="'delete_' + ${answer.answerId}">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+
+                    <button type="submit" class="optbutton" name="buttonQuestionHandler"
+                            th:value="'edit_' + ${answer.answerId}">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </form>
+</div>
+
+
+<!-- Cancel and Save Buttons -->
+
+<div class="footer">
+    <form method="get" action="#" th:object="${answersView}" th:action="@{/add-answer}">
+        <button class="formularabsenden">+ Antwort</button>
+    </form>
+</div>
+
+</body>
+</html>

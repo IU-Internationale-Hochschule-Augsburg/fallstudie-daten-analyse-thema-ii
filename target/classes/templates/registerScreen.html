@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link th:href="@{/css/login.css}" th:rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet"/>
+
+  <link rel="stylesheet" href="../static/css/login.css" >
+
+  <title>Registrierung</title>
+
+</head>
+<body>
+<form id="formSignUp" class="signUp-content" action="#" th:action="@{/save-registration}" method="post" th:object="${registerForm}">
+  <div class="containerSignUp">
+    <h1>Registrierung</h1>
+    <br>
+    <p style="text-align: center">Bitte füllen Sie alle Felder aus, um einen Account zu erstellen.</p>
+    <br>
+    <hr>
+
+    <div class="input-box"><label for="user-ID"><b>Benutzername</b></label>
+      <input id="user-ID" type="text" required placeholder="Benutzername eingeben" th:field="${registerForm.username}" maxlength="256">
+    </div>
+
+    <div class="input-box"><label for="surname"><b>Name</b></label>
+      <input id="surname" type="text" required placeholder="Name eingeben" th:field="${registerForm.surname}" maxlength="256">
+    </div>
+
+    <div class="input-box"><label for="firstname"><b>Vorname</b></label>
+      <input id="firstname" type="text" required placeholder="Vorname eingeben" th:field="${registerForm.firstname}" maxlength="256">
+    </div>
+
+    <div class="input-box"><label for="email"><b>Email</b></label>
+      <input type="email" placeholder="E-Mail-Adresse eingeben" id="email" th:field="${registerForm.email}" required maxlength="256">
+    </div>
+
+    <div class="input-box"><label for="psw"><b>Passwort (mindestens 8 Zeichen)</b></label>
+      <input type="password" placeholder="Passwort eingeben" id="psw" th:field="${registerForm.password}" required maxlength="256" minlength="8">
+    </div>
+
+    <div class="input-box"><label for="psw-repeat"><b>Passwort wiederholen</b></label>
+      <input type="password" placeholder="Passwort wiederholen" id="psw-repeat" th:field="${registerForm.confirmPassword}" required maxlength="256"
+             minlength="8">
+    </div>
+
+    <p style="margin-bottom: 16px">Durch die Erstellung eines Kontos erklären Sie sich mit unseren
+      <a href="#" style="color:dodgerblue">
+        Nutzungsbedingungen und Datenschutz
+      </a>
+      einverstanden.
+    </p>
+
+    <div class="clearfix">
+      <button type="button"
+              onclick="goBack()"
+              class="cnlbutton"
+              style="width: 49%; float: left;">Abbrechen
+      </button>
+
+    <button form="formSignUp" type="submit" class="optbutton" style="width: 49%; float: right">Registrieren</button>
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+
+  </div>
+</form>
+</body>
+</html>

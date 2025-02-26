@@ -1,0 +1,101 @@
+<!-- Analysis-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/survey.css">
+
+    <title>Antwortanalyseansicht</title>
+</head>
+
+<style>
+    .diagram {
+        border-collapse: collapse;
+        width: 100%;
+        display: none;
+    }
+</style>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <div class="col-75">
+      <h3 th:text="${survey.title}"></h3>
+    </div>
+    <div class="col-25" style="text-align: right">
+        <form action="#" th:action="@{button-analysis-handler}" th:object="${survey}" method="get" style="width: 100%">
+            <!-- hidden input field to store which button was clicked -->
+            <input type="hidden" name="buttonHandler" th:value="${buttonHandler}"/>
+
+            <button type="submit" name="buttonHandler" th:value="'back_' + ${survey.surveyId}"
+                        class="optbutton">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span class="tooltiptext">Zurück</span>                
+            </button>
+            <!-- hidden input field to store which button was clicked -->
+            <input type="hidden" name="surveyId" id="surveyId" th:value="${survey.surveyId}"/>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="content">
+    
+    <div style="width: 100%;">
+    <form action="#" th:object="${questionsView}" method="get" style="text-align:left; width: 100%">
+        <label for="question1">Wählen Sie die 1. Frage:</label>
+        <select id="question1" th:field="*{questions}">
+            <option th:each="question, questionStat : *{questions}"
+                    th:value="${question.questionId}"
+                    th:text="${question.questionText}"
+                    th:id="${question.questionId}"
+                    th:if="${!(question.questionType == 'open text response')}"></option>
+        </select>
+    </form>
+
+    <form action="#" th:object="${questionsView}" method="get" style="text-align:left; width: 100%">
+        <label for="question2">Wählen Sie die 2. Frage:</label>
+        <select id="question2" th:field="*{questions}">
+            <option th:each="question, questionStat : *{questions}"
+                    th:value="${question.questionId}"
+                    th:text="${question.questionText}"
+                    th:id="${question.questionId}" 
+                    th:if="${!(question.questionType == 'open text response')}"></option>
+        </select>
+    </form>
+
+    <p id="fehler" style="font-size: medium;">Die selbe Frage kann nicht mit sich selbst verglichen werden!</p>
+
+    <form action="#" th:action="@{/heatmap}" method="get" style="text-align:left; width: 100%">
+    <button type="buttonHeatmap" class="optbutton" title="Vergleich anzeigen" onclick="heatmap()">
+        Vergleich anzeigen
+    </button>
+
+    <input type="hidden" name="document" id="document" value=""/>
+</form> 
+</div>
+
+</div>
+
+<div class="footer">
+
+</div>
+
+
+<script>
+    function heatmap(){
+        var question1 = document.getElementById('question1').value;
+        var question2 = document.getElementById('question2').value;
+        var questionsIds = document.getElementById('document');
+        questionsIds.value = question1 + "_" + question2;
+    }
+</script>
+</body>
+</html>

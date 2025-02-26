@@ -1,0 +1,54 @@
+<!-- Add-question-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="../../static/css/survey.css">
+    
+    <title>Antwort hinzufügen</title>
+</head>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <h3>"Frage1"</h3>
+</div>
+
+<div class="content">
+    <form style="width: 100%" id="addAnswerForm" action="#" method="post"> <!--th:action="@{/answer-save}" th:object="${survey}" >-->
+        <!-- answer -->
+        <div class="formularreihe">
+            <!-- answer Number -->
+            <div class="col-25">
+
+                <!--@ALINA "Antwort NR" muss dynamisch sein-->
+
+                <label for="answer">Antwort 1</label>
+            </div>
+
+            <!-- Placeholder and text field for the answer -->
+            <div class="col-75">
+                <input type="text" name="answer" id="answer" placeholder="Geben Sie eine Antwort ein" class="textfeld" required autofocus maxlength="256"> <!-- th:field="*{answer}" -->
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Cancel and Save buttons including actions -->
+<div class="footer">
+    <form method="post" action="/answers-view">
+        <button type="submit" class="formularabsenden">Abbrechen</button>
+    </form>
+
+    <button type="submit" form="addAnswerForm" class="formularabsenden">Speichern</button>
+</div>
+
+</body>
+</html>

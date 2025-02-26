@@ -1,0 +1,205 @@
+<!-- Participant View -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{/js/participantView.js}"></script>
+
+     <link rel="stylesheet" href="../static/css/survey.css">
+
+    <title>Fragebogen</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <form id="surveyTitle" style="padding: 6px" th:object="${survey}" method="get">
+        <h3 th:text="${survey.title}"></h3>
+    </form>
+</div>
+
+<div class="content" style="flex-direction: column;">
+    <div style="margin-bottom: 10px; padding: 6px; width: 100%">
+        <b style="font-size: 30px" id="questionText" th:text="${question.questionText}"></b>
+    </div>
+
+
+    <form id="questionTypesForm" style="padding: 6px" action="#" th:action="@{/save-response}" th:object="${participantSurveyView}"
+          method="post">
+
+        <div id="checkboxes" class="col-75">
+            <label id="label1" class="container2">
+                <input type="checkbox" id="checkbox1" th:text="${question.answerOption1}"
+                       onclick="handleCheckboxClick(1)"/>
+                <input type="hidden" id="checkboxAntwortOption1" name="antwortOption1"
+                       th:field="${participantSurveyView.checkBoxAnswerOption1}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label2" class="container2">
+                <input type="checkbox" id="checkbox2" th:text="${question.answerOption2}"
+                       onclick="handleCheckboxClick(2)"/>
+                <input type="hidden" id="checkboxAntwortOption2" name="antwortOption2"
+                       th:field="${participantSurveyView.checkBoxAnswerOption2}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label3" class="container2">
+                <input type="checkbox" id="checkbox3" th:text="${question.answerOption3}"
+                       onclick="handleCheckboxClick(3)"/>
+                <input type="hidden" id="checkboxAntwortOption3" name="antwortOption3"
+                       th:field="${participantSurveyView.checkBoxAnswerOption3}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label4" class="container2">
+                <input type="checkbox" id="checkbox4" th:text="${question.answerOption4}"
+                       onclick="handleCheckboxClick(4)"/>
+                <input type="hidden" id="checkboxAntwortOption4" name="antwortOption4"
+                       th:field="${participantSurveyView.checkBoxAnswerOption4}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label5" class="container2">
+                <input type="checkbox" id="checkbox5" th:text="${question.answerOption5}"
+                       onclick="handleCheckboxClick(5)"/>
+                <input type="hidden" id="checkboxAntwortOption5" name="antwortOption5"
+                       th:field="${participantSurveyView.checkBoxAnswerOption5}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label6" class="container2">
+                <input type="checkbox" id="checkbox6" th:text="${question.answerOption6}"
+                       onclick="handleCheckboxClick(6)"/>
+                <input type="hidden" id="checkboxAntwortOption6" name="antwortOption6"
+                       th:field="${participantSurveyView.checkBoxAnswerOption6}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label7" class="container2">
+                <input type="checkbox" id="checkbox7" th:text="${question.answerOption7}"
+                       onclick="handleCheckboxClick(7)"/>
+                <input type="hidden" id="checkboxAntwortOption7" name="antwortOption7"
+                       th:field="${participantSurveyView.checkBoxAnswerOption7}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label8" class="container2">
+                <input type="checkbox" id="checkbox8" th:text="${question.answerOption8}"
+                       onclick="handleCheckboxClick(8)"/>
+                <input type="hidden" id="checkboxAntwortOption8" name="antwortOption8"
+                       th:field="${participantSurveyView.checkBoxAnswerOption8}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label9" class="container2">
+                <input type="checkbox" id="checkbox9" th:text="${question.answerOption9}"
+                       onclick="handleCheckboxClick(9)"/>
+                <input type="hidden" id="checkboxAntwortOption9" name="antwortOption9"
+                       th:field="${participantSurveyView.checkBoxAnswerOption9}"/>
+                <span class="checkmark2"></span>
+            </label>
+            <label id="label10" class="container2">
+                <input type="checkbox" id="checkbox10" th:text="${question.answerOption10}"
+                       onclick="handleCheckboxClick(10)"/>
+                <input type="hidden" id="checkboxAntwortOption10" name="antwortOption10"
+                       th:field="${participantSurveyView.checkBoxAnswerOption10}"/>
+                <span class="checkmark2"></span>
+            </label>
+        </div>
+
+        <div id="radiobuttons" class="col-75">
+            <label id="radio1" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption1}"
+                       onclick="handleRadioButtonClick(1)"/>
+                <input type="hidden" id="radiobuttonAntwortOption1" name="antwortOption1"
+                       th:field="${participantSurveyView.radioButtonAnswerOption1}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio2" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption2}"
+                       onclick="handleRadioButtonClick(2)"/>
+                <input type="hidden" id="radiobuttonAntwortOption2" name="antwortOption2"
+                       th:field="${participantSurveyView.radioButtonAnswerOption2}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio3" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption3}"
+                       onclick="handleRadioButtonClick(3)"/>
+                <input type="hidden" id="radiobuttonAntwortOption3" name="antwortOption3"
+                       th:field="${participantSurveyView.radioButtonAnswerOption3}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio4" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption4}"
+                       onclick="handleRadioButtonClick(4)"/>
+                <input type="hidden" id="radiobuttonAntwortOption4" name="antwortOption4"
+                       th:field="${participantSurveyView.radioButtonAnswerOption4}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio5" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption5}"
+                       onclick="handleRadioButtonClick(5)"/>
+                <input type="hidden" id="radiobuttonAntwortOption5" name="antwortOption5"
+                       th:field="${participantSurveyView.radioButtonAnswerOption5}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio6" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption6}"
+                       onclick="handleRadioButtonClick(6)"/>
+                <input type="hidden" id="radiobuttonAntwortOption6" name="antwortOption6"
+                       th:field="${participantSurveyView.radioButtonAnswerOption6}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio7" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption7}"
+                       onclick="handleRadioButtonClick(7)"/>
+                <input type="hidden" id="radiobuttonAntwortOption7" name="antwortOption7"
+                       th:field="${participantSurveyView.radioButtonAnswerOption7}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio8" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption8}"
+                       onclick="handleRadioButtonClick(8)"/>
+                <input type="hidden" id="radiobuttonAntwortOption8" name="antwortOption8"
+                       th:field="${participantSurveyView.radioButtonAnswerOption8}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio9" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption9}"
+                       onclick="handleRadioButtonClick(9)"/>
+                <input type="hidden" id="radiobuttonAntwortOption9" name="antwortOption9"
+                       th:field="${participantSurveyView.radioButtonAnswerOption9}"/>
+                <span class="checkmark"></span>
+            </label>
+            <label id="radio10" class="container">
+                <input type="radio" name="radiobuttons" th:text="${question.answerOption10}"
+                       onclick="handleRadioButtonClick(10)"/>
+                <input type="hidden" id="radiobuttonAntwortOption10" name="antwortOption10"
+                       th:field="${participantSurveyView.radioButtonAnswerOption10}"/>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <div id="openTextResponse" class="col-75">
+            <input id="input field" class="textfeld" style="padding: 12px;height: 42px;" type="text"
+                   placeholder="Geben Sie eine Antwort ein" th:field="${participantSurveyView.textinput}">
+        </div>
+
+        <input type="hidden" id="questionType" th:field="${question.questionType}" readonly>
+        <input type="hidden" id="surveyId" th:field="${question.surveyId}" readonly>
+        <input type="hidden" id="questionId" th:field="${question.questionId}" readonly>
+        <input type="hidden" id="currentQuestion" th:field="${participantSurveyView.currentQuestion}" readonly>
+    </form>
+</div>
+
+<div class="footer">
+    <button id="submitButton" form="questionTypesForm" type="button" class="formularabsenden">
+        Weiter
+    </button>
+</div>
+
+</body>
+</html>

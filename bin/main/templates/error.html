@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .monster {
+            margin-top: 120px;
+        }
+
+        pre {
+            white-space: pre;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+<div class="monster">
+    <pre>
+        <!-- please do not delete this ascii-art, on the screen it looks correct -->
+                \||/
+                     |  @___oo
+             /\  /\   / (__,,,,|
+     ) /^\) ^\/ _)
+     )   /^\/   _)
+     )   _ /  / _)
+ /\  )/\/ ||  | )_)
+ <  >      |(,,) )__)
+  ||      /    \)___)\
+      | \____(      )___) )___
+       \______(_______;;; __;;;
+    </pre>
+</div>
+
+<div>
+    <h1>Oops! Something went wrong...</h1>
+    <p>We're sorry, but it looks like there was an error processing your request.</p>
+    <button class="optbutton" onclick="goBack()">Go back</button>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    // this might be useful in the future
+    window.onerror = function(message, source, lineno, colno, error) {
+        console.error("Error message: " + message);
+        console.error("Source: " + source);
+        console.error("Line number: " + lineno);
+        console.error("Column number: " + colno);
+        console.error("Error object: " + error);
+    };
+</script>
+</body>
+</html>

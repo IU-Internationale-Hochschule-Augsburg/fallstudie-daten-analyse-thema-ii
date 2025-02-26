@@ -1,0 +1,130 @@
+<!-- Checkbox View -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{/js/participantView.js}"></script>
+
+    <!-- <link rel="stylesheet" href="../static/survey.css"> -->
+
+    <title>Befragter Check Box</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <form id="surveyTitle" style="padding: 6px" th:object="${survey}" method="get">
+        <h3 th:text="${survey.title}"></h3>
+    </form>
+</div>
+
+<div class="content" style="flex-direction: column;">
+    <div style="margin-bottom: 10px; padding: 6px; width: 100%">
+        <b style="font-size: 30px" th:text="${question.questionText}"></b>
+    </div>
+
+
+    <form id="checkboxForm" style="padding: 6px" action="#" th:action="@{/save-response}" th:object="${answer}"
+          method="post">
+
+        <label id="label1" class="container2">
+            <input type="checkbox" id="checkbox1" th:text="${question.answerOption1}"
+                   onclick="handleCheckboxClick(1)"/>
+            <input type="hidden" id="checkboxAntwortOption1" name="antwortOption1" th:field="${answer.answerOption1}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label2" class="container2">
+            <input type="checkbox" id="checkbox2" th:text="${question.answerOption2}"
+                   onclick="handleCheckboxClick(2)"/>
+            <input type="hidden" id="checkboxAntwortOption2" name="antwortOption2" th:field="${answer.answerOption2}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label3" class="container2">
+            <input type="checkbox" id="checkbox3" th:text="${question.answerOption3}"
+                   onclick="handleCheckboxClick(3)"/>
+            <input type="hidden" id="checkboxAntwortOption3" name="antwortOption3" th:field="${answer.answerOption3}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label4" class="container2">
+            <input type="checkbox" id="checkbox4" th:text="${question.answerOption4}"
+                   onclick="handleCheckboxClick(4)"/>
+            <input type="hidden" id="checkboxAntwortOption4" name="antwortOption4" th:field="${answer.answerOption4}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label5" class="container2">
+            <input type="checkbox" id="checkbox5" th:text="${question.answerOption5}"
+                   onclick="handleCheckboxClick(5)"/>
+            <input type="hidden" id="checkboxAntwortOption5" name="antwortOption5" th:field="${answer.answerOption5}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label6" class="container2">
+            <input type="checkbox" id="checkbox6" th:text="${question.answerOption6}"
+                   onclick="handleCheckboxClick(6)"/>
+            <input type="hidden" id="checkboxAntwortOption6" name="antwortOption6" th:field="${answer.answerOption6}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label7" class="container2">
+            <input type="checkbox" id="checkbox7" th:text="${question.answerOption7}"
+                   onclick="handleCheckboxClick(7)"/>
+            <input type="hidden" id="checkboxAntwortOption7" name="antwortOption7" th:field="${answer.answerOption7}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label8" class="container2">
+            <input type="checkbox" id="checkbox8" th:text="${question.answerOption8}"
+                   onclick="handleCheckboxClick(8)"/>
+            <input type="hidden" id="checkboxAntwortOption8" name="antwortOption8" th:field="${answer.answerOption8}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label9" class="container2">
+            <input type="checkbox" id="checkbox9" th:text="${question.answerOption9}"
+                   onclick="handleCheckboxClick(9)"/>
+            <input type="hidden" id="checkboxAntwortOption9" name="antwortOption9" th:field="${answer.answerOption9}"/>
+            <span class="checkmark2"></span>
+        </label>
+        <label id="label10" class="container2">
+            <input type="checkbox" id="checkbox10" th:text="${question.answerOption10}"
+                   onclick="handleCheckboxClick(10)"/>
+            <input type="hidden" id="checkboxAntwortOption10" name="antwortOption10" th:field="${answer.answerOption10}"/>
+            <span class="checkmark2"></span>
+        </label>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                for (var i = 1; i <= 10; i++) {
+                    var label = document.getElementById('label' + i);
+                    var content = label.textContent.trim();
+
+                    if (content === "") {
+                        label.style.display = "none";
+                        //document.getElementById("answerOption" + i).value = "";
+                    } else {
+                        label.style.display = "block";
+                    }
+                }
+            });
+        </script>
+
+        <input type="hidden" id="questionType" th:field="${question.questionType}" readonly>
+        <input type="hidden" id="surveyId" th:field="${question.surveyId}" readonly>
+        <input type="hidden" id="questionId" th:field="${question.questionId}" readonly>
+        <input type="hidden" id="answerId" th:field="${answer.answerId}" readonly>
+    </form>
+</div>
+
+
+<div class="footer">
+    <button form="checkboxForm" type="submit" class="formularabsenden">Weiter</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+spring:
+  sql:
+    init:
+      mode: embedded
+  profiles:
+    active: default
+  datasource:
+    url:
+    username:
+    password:
+    driverClassName: org.postgresql.Driver
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  banner:
+    location: static/banner/banner.txt
+  web:
+    resources:
+      static-locations: classpath:/static/
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: ${PORT:8080}
+jasypt:
+  encryptor:
+    password:
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    iv-generator-classname: org.jasypt.iv.RandomIvGenerator

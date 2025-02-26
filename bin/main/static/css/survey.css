@@ -1,0 +1,349 @@
+body {
+    min-height: 100vh;
+    grid-template-areas: "header header"
+        "content content"
+        "footer footer";
+    grid-template-columns: auto auto;
+    grid-template-rows: 100px 1fr 100px;
+    background-color: #9fa9a3;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+
+}
+
+/* Section for basic color management */
+
+.header, .content, .footer {
+    background-color: #f0f0f0;
+}
+
+.optbutton, .formularabsenden {
+    background-color: #c5d5c5;
+}
+
+.optbutton:hover {
+    background: #e3e0cc
+}
+
+
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 1;
+    box-sizing: border-box;
+    max-height: 100px;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+}
+
+.content {
+    grid-area: content;
+    display: flex;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 28px;
+    min-height: 100px;
+
+}
+
+.footer {
+    grid-area: footer;
+    display: flex;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 28px;
+    box-sizing: border-box;
+    max-height: 200px;
+    width: 100%;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+}
+
+
+.col-25 {
+    width: 25%;
+}
+
+.col-75 {
+    width: 75%;
+    flex-shrink: 3;
+
+}
+
+.textfeld {
+    padding: 12px 12px 12px 12px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+
+}
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .footer {
+    max-height: 300px;}
+}
+
+.formularreihe {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 9px;
+
+}
+
+.formularabsenden {
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 250px;
+
+}
+
+.formularabsenden:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.optbutton {
+    border: none;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    position: relative;
+
+}
+
+
+
+
+.optbutton .tooltiptext {
+    visibility: hidden;
+    width: 70px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 115%;
+    left: -25%;
+    /*margin-left: -75px; */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.optbutton .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.optbutton:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+.tabelletext {
+
+    td:nth-child(2) {
+        width: 270px;
+    }
+
+    th, td {
+        padding: 6px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    border-collapse: collapse;
+    width: 100%
+
+}
+
+.containerFlex {
+    display: flex;
+    box-sizing: border-box;
+}
+
+
+/* A copy of https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio */
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #c5d5c5;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* copy end of https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio */
+
+
+/* A copf of https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_checkbox */
+
+/* The container */
+.container2 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container2 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border: solid #000000 1px;
+
+}
+
+/* On mouse-over, add a grey background color */
+.container2:hover input ~ .checkmark2 {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container2 input:checked ~ .checkmark2 {
+    background-color: #c5d5c5;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container2 input:checked ~ .checkmark2:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container2 .checkmark2:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* copy end of https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_checkbox */

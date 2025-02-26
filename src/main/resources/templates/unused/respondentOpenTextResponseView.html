@@ -1,0 +1,51 @@
+<!-- Open Text Response View -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet">
+
+  <!-- <link rel="stylesheet" href="../static/survey.css"> -->
+
+  <title>Befragter Open Text Response</title>
+</head>
+<body>
+
+
+<div class="header">
+  <form id="surveyTitle" style="padding: 6px" th:object="${survey}" method="get">
+    <h3 th:text="${survey.title}"></h3>
+  </form>
+</div>
+
+<div class="content" style="flex-direction: column;">
+  <div style="margin-bottom: 10px; padding: 6px; width: 100%">
+    <b style="font-size: 30px" th:text="${question.questionText}"></b>
+  </div>
+
+
+  <form id="openTextResponseForm" style="padding: 6px" action="#" th:action="@{/save-response}" th:object="${answer}"  method="post">
+
+    <div class="col-75">
+      <input class="textfeld" style="padding: 12px;height: 42px;" type="text" placeholder="Geben Sie eine Antwort ein" th:field="${answer.textinput}">
+    </div>
+
+    <input type="hidden" id="questionType" th:field="${question.questionType}" readonly>
+    <input type="hidden" id="surveyId" th:field="${question.surveyId}" readonly>
+    <input type="hidden" id="questionId" th:field="${question.questionId}" readonly>
+    <input type="hidden" id="answerId" th:field="${answer.answerId}" readonly>
+  </form>
+
+</div>
+
+
+<div class="footer">
+  <button form="openTextResponseForm" type="submit" class="formularabsenden">Weiter</button>
+</div>
+
+</body>
+</html>

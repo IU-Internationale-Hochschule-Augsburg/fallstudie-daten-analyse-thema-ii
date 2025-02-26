@@ -1,0 +1,138 @@
+<!-- Analysis-view -->
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link th:href="@{/css/survey.css}" th:rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/survey.css">
+    <title>Antwortanalyseansicht</title>
+</head>
+
+<style>
+    .diagram {
+        border-collapse: collapse;
+        width: 100%;
+        display: block;
+    }
+
+    .tabelle {
+        border-collapse: collapse;
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<body>
+<!-- Page title -->
+<div class="header">
+    <div class="col-75">
+        <h3 th:text="${survey.title}"></h3>
+    </div>
+    <div class="col-25" style="text-align: right">
+        <form style="width: 100%;" action="#" th:action="@{/survey-admin}" method="get">
+            <button class="optbutton" title="Zurück">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="content" style="display: block">
+    <div style="width: 100%">
+        <!-- Button zum Wechseln auf die Vergleich-Seite -->
+        <form style="text-align:right; width: 100%;" action="#" th:action="@{/compare-questions}" method="get">
+            <button class="optbutton" title="Vergleiche">
+                <span>Vergleiche</span>
+            </button>
+            <input type="hidden" name="surveyId" id="surveyId" th:value="${survey.surveyId}"/>
+        </form>
+    </div>
+
+    <form action="#" th:object="${questionsView}" method="get" style="text-align:left; width: 100%">
+        <table class="tabelletext">
+            <tbody style="padding: 10px">
+
+            <!-- Loop über die Fragen -->
+            <tr th:each="question, questionStat : *{questions}">
+                <td><details>
+                    <summary th:text="${question.questionText}"></summary>
+                    <div style="width: 100%; text-indent: 25px">
+                        <button th:id="${question.questionId}" type="button" class="optbutton" title="Diagramm anzeigen"
+                                onclick="toggleDisplay(this.id, 'diagram_', 'table_')"
+                                name="buttonHandler" th:value="'diagram_' + ${question.questionId}"
+                                th:unless="${question.questionType=='open text response'}">
+                            Diagramm
+                        </button>
+                        <button th:id="${question.questionId}" type="button" class="optbutton" title="Tabelle anzeigen"
+                                onclick="toggleDisplay(this.id, 'table_', 'diagram_')"
+                                name="buttonHandler" th:value="'table_'+ ${question.questionId}"
+                                th:unless="${question.questionType=='open text response'}">
+                            Tabelle
+                        </button>
+                    </div>
+
+                    <div style="width: 100%; text-indent: 25px">
+                        <!-- Diagramme für die Frage -->
+                        <div th:id="'diagram_'+${question.questionId}" class="diagram" style="display: none;">
+                            <h4>Diagramme für diese Frage</h4>
+                            <img th:id="'chart_pie_'+${question.questionId}"
+                                 th:src="@{'/images/' + ${question.questionId} + '_pie.png'}"
+                                 alt="Kreisdiagramm für Frage" width="400" height="400">
+
+                            <img th:id="'chart_bar_'+${question.questionId}"
+                                 th:src="@{'/images/' + ${question.questionId} + '_bar.png'}"
+                                 alt="Balkendiagramm für Frage" width="400" height="400">
+
+                            <img th:if="${question.questionType == 'open text response'}"
+                                 th:id="'chart_wordcloud_'+${question.questionId}"
+                                 th:src="@{'/images/' + ${question.questionId} + '_wordcloud.png'}"
+                                 alt="Word Cloud für Frage" width="400" height="400">
+                        </div>
+
+                        <div th:id="'table_'+${question.questionId}" class="tabelle" style="display: block;">
+                            <form action="#" th:object="${answersView}" method="get"
+                                  style="text-align:left; width: fit-content">
+                                <table>
+                                    <tr style="width: fit-content">
+                                        <td th:if="${!(question.getAnswerOption1()=='')}" th:text="${question.getAnswerOption1()}"></td>
+                                        <td th:if="${!(question.getAnswerOption2()=='')}" th:text="${question.getAnswerOption2()}"></td>
+                                        <td th:if="${!(question.getAnswerOption3()=='')}" th:text="${question.getAnswerOption3()}"></td>
+                                        <td th:if="${!(question.getAnswerOption4()=='')}" th:text="${question.getAnswerOption4()}"></td>
+                                    </tr>
+                                    <tr th:each="answer, answerStat : *{answers}" th:if="${question.questionId == answer.questionId}">
+                                        <td th:if="${!(answer.getAnswerOption1()=='')}" th:text="${answer.getAnswerOption1()}"></td>
+                                        <td th:if="${!(answer.getAnswerOption2()=='')}" th:text="${answer.getAnswerOption2()}"></td>
+                                        <td th:if="${!(answer.getAnswerOption3()=='')}" th:text="${answer.getAnswerOption3()}"></td>
+                                        <td th:if="${!(answer.getAnswerOption4()=='')}" th:text="${answer.getAnswerOption4()}"></td>
+                                        <td th:if="${!(answer.getTextinput()=='') && question.questionType=='open text response'}"
+                                            th:text="${answer.getTextinput()}"></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <td style="text-align: right">
+                        <input type="hidden" name="questionId" th:id="questionId" th:value="${question.questionId}"/>
+                    </td>
+                </details></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<div class="footer"></div>
+
+<script>
+    function toggleDisplay(buttonId, showId, hideId) {
+        document.getElementById(hideId + buttonId).style.display = 'none';
+        document.getElementById(showId + buttonId).style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

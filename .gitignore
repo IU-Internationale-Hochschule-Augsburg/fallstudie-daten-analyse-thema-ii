@@ -3,3 +3,8 @@
 gradle/
 /build/
 src/main/resources/R/Rscript.pkg
+src/main/resources/application.yaml
+src/main/resources/R/DatabaseConnection.R
+src/main/resources/application.yaml
+src/main/resources/R/DatabaseConnection.R
+target/

@@ -81,6 +81,10 @@
                                 <option value="wordcloud" th:if="${question.questionType == 'open text response'}">Word Cloud</option>
                             </select>
 
+                            <!-- Checkbox zum Speichern der Auswahl -->
+                            <label th:for="'saveChart_'+${question.questionId}">Diagrammtyp für Wiederverwendung speichern:</label>
+                            <input type="checkbox" th:id="'saveChart_' + ${question.questionId}" />
+
                             <!-- Standardmäßig angezeigtes Bild -->
                             <div th:id="'diagram_'+${question.questionId}" class="diagram" style="display: block;">
                                 <img th:id="'chart_'+${question.questionId}"

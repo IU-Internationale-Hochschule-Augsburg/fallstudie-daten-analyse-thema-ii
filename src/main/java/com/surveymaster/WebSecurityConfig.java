@@ -23,10 +23,11 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/banner/**", "/register/**",
                                 "/save-registration", "participant-view/**", "/save-response/**",
-                                "/save-chart-selection", "/report").permitAll()
+                                "/save-chart-selection", "/report", "/api/reports/**") // <-- Hier hinzugefügt
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/save-chart-selection")) // CSRF für POST-Request ignorieren
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/save-chart-selection", "/api/reports/**")) // CSRF für Reports API ignorieren
                 .sessionManagement(session -> session.sessionFixation().none()) // Session erhalten
                 .formLogin(login -> login
                         .loginPage("/login")
